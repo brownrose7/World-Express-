@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7a3f2b">
+  <meta name="description" content="World Express - um mundo de business">
+  <title>World Express</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #6f3827, #a75f72);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(940px, 94%);
+      margin: auto;
+      padding: 24px 0 45px;
+    }
+
+    header {
+      text-align: center;
+      padding: 28px 10px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(38px, 9vw, 64px);
+      font-weight: 800;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: clamp(20px, 5vw, 30px);
+    }
+
+    .card {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 28px;
+      padding: 22px;
+      margin: 18px 0;
+      box-shadow: 0 12px 35px rgba(0,0,0,.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .card h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+    }
+
+    .products {
+      display: grid;
+      gap: 12px;
+    }
+
+    .product {
+      width: 100%;
+      border: 0;
+      border-radius: 20px;
+      padding: 19px 18px;
+      background: rgba(255,255,255,.22);
+      color: white;
+      font-size: 19px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .15s, background .15s;
+    }
+
+    .product:hover, .menu button:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.30);
+    }
+
+    .product span {
+      display: block;
+      font-size: 13px;
+      opacity: .82;
+      margin-top: 4px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .menu button, .primary {
+      border: 0;
+      border-radius: 17px;
+      padding: 16px;
+      background: rgba(255,255,255,.22);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #25D366;
+      font-weight: 700;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .primary:hover { filter: brightness(1.06); }
+
+    .small {
+      opacity: .82;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      opacity: .8;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    /* Janela */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.68);
+      z-index: 50;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .modal-box {
+      max-width: 560px;
+      margin: 6vh auto;
+      background: #fff;
+      color: #222;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .modal-box h2 { margin-top: 0; color: #713b2c; }
+
+    .close {
+      float: right;
+      border: 0;
+      background: #eee;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 700;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    textarea { min-height: 100px; resize: vertical; }
+
+    .form-btn {
+      margin-top: 14px;
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 14px;
+      background: #713b2c;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .info {
+      background: #f5eeee;
+      padding: 14px;
+      border-radius: 14px;
+      line-height: 1.55;
+      margin: 12px 0;
+    }
+
+    @media (max-width: 560px) {
+      .menu { grid-template-columns: 1fr; }
+      .card { padding: 18px; border-radius: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <h1>World Express</h1>
+      <p>Um mundo de business</p>
+    </header>
+
+    <section class="card">
+      <h2>🛍️ Nossos produtos</h2>
+
+      <div class="products">
+        <button class="product" onclick="produto('Sabão')">
+          🧼 Sabão
+          <span>Produção artesanal</span>
+        </button>
+
+        <button class="product" onclick="produto('Sabonete')">
+          🧴 Sabonete
+          <span>Cuidados e higiene</span>
+        </button>
+
+        <button class="product" onclick="produto('Sabão líquido artesanal')">
+          🫧 Sabão líquido artesanal
+          <span>Produto artesanal caseiro</span>
+        </button>
+
+        <button class="product" onclick="produto('Vasos artesanais')">
+          🏺 Vasos artesanais
+          <span>Peças artesanais</span>
+        </button>
+
+        <button class="product" onclick="produto('Resina')">
+          ✨ Resina
+          <span>Produtos e peças em resina</span>
+        </button>
+
+        <button class="product" onclick="produto('Capas de celular')">
+          📱 Capas de celular
+          <span>Proteção e estilo</span>
+        </button>
+
+        <button class="product" onclick="produto('Películas')">
+          🛡️ Películas
+          <span>Proteção para o seu telefone</span>
+        </button>
+
+        <button class="product" onclick="produto('Acessórios eletrônicos')">
+          🔌 Acessórios eletrônicos
+          <span>Diversos acessórios</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🌍 Área World Express</h2>
+      <div class="menu">
+        <button onclick="abrir('afiliado')">🤝 Conta de afiliados</button>
+        <button onclick="abrir('pagamentos')">💳 Pagamentos</button>
+        <button onclick="abrir('marketing')">📣 Marketing</button>
+        <button onclick="abrir('suporte')">💬 Chat / Suporte</button>
+        <button onclick="abrir('termos')">📄 Termos</button>
+        <button onclick="abrir('privacidade')">🔐 Privacidade</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>📲 Atendimento</h2>
+      <p class="small">
+        Faça o seu pedido ou fale diretamente com a World Express pelo WhatsApp.
+      </p>
+      <button class="primary" onclick="whatsapp('Olá! Quero fazer um pedido na World Express.')">
+        💚 Falar no WhatsApp
+      </button>
+    </section>
+
+    <footer>
+      © 2026 World Express — Um mundo de business
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <button class="close" onclick="fechar()">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP = "244929309622";
+
+    function abrir(tipo) {
+      let html = "";
+
+      if (tipo === "afiliado") {
+        html = `
+          <h2>🤝 Conta de afiliados</h2>
+          <p>Cadastre o seu interesse em ser afiliado da World Express.</p>
+
+          <label>Nome</label>
+          <input id="afNome" placeholder="Seu nome">
+
+          <label>Telefone / WhatsApp</label>
+          <input id="afTel" placeholder="+244...">
+
+          <label>Como pretende vender?</label>
+          <textarea id="afInfo" placeholder="Ex.: WhatsApp, Facebook, TikTok..."></textarea>
+
+          <button class="form-btn" onclick="enviarAfiliado()">Enviar cadastro</button>
+        `;
+      }
+
+      if (tipo === "pagamentos") {
+        html = `
+          <h2>💳 Pagamentos</h2>
+          <div class="info">
+            <b>Formas de pagamento:</b><br>
+            Crédito / transferência / outros métodos disponíveis.
+          </div>
+          <p>
+            Para receber os dados corretos de pagamento e confirmar o seu pedido,
+            fale com a nossa equipe pelo WhatsApp.
+          </p>
+          <button class="form-btn" onclick="whatsapp('Olá! Quero saber quais são os métodos de pagamento da World Express.')">
+            Falar sobre pagamento
+          </button>
+        `;
+      }
+
+      if (tipo === "marketing") {
+        html = `
+          <h2>📣 Marketing e publicidade</h2>
+          <p>
+            Quer divulgar um produto, promoção ou campanha na World Express?
+            Envie os detalhes para a nossa equipe.
+          </p>
+
+          <label>Nome</label>
+          <input id="mkNome" placeholder="Seu nome">
+
+          <label>Produto ou campanha</label>
+          <input id="mkProduto" placeholder="Ex.: promoção de capas">
+
+          <label>Mensagem</label>
+          <textarea id="mkMsg" placeholder="Explique o que deseja divulgar"></textarea>
+
+          <button class="form-btn" onclick="enviarMarketing()">Solicitar publicidade</button>
+        `;
+      }
+
+      if (tipo === "suporte") {
+        html = `
+          <h2>💬 Chat / Suporte</h2>
+          <p>Estamos prontos para ajudar com pedidos, produtos, afiliados e dúvidas.</p>
+          <button class="form-btn" onclick="whatsapp('Olá! Preciso de ajuda no suporte da World Express.')">
+            Abrir atendimento no WhatsApp
+          </button>
+        `;
+      }
+
+      if (tipo === "termos") {
+        html = `
+          <h2>📄 Termos de utilização</h2>
+          <p>
+            A World Express apresenta produtos e serviços através desta página.
+            Os preços, disponibilidade, condições de entrega e formas de pagamento
+            devem ser confirmados com a equipe antes da compra.
+          </p>
+          <p>
+            O uso da plataforma significa que o utilizador concorda em fornecer
+            informações verdadeiras e utilizar o serviço de forma responsável.
+          </p>
+        `;
+      }
+
+      if (tipo === "privacidade") {
+        html = `
+          <h2>🔐 Privacidade</h2>
+          <p>
+            As informações enviadas pelo utilizador através dos formulários são
+            utilizadas para atendimento e comunicação relacionada à World Express.
+          </p>
+          <p>
+            Evite enviar senhas, códigos bancários ou outras informações secretas
+            através desta página.
+          </p>
+        `;
+      }
+
+      document.getElementById("modalContent").innerHTML = html;
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function produto(nome) {
+      const mensagem = "Olá! Quero informações e preço de: " + nome + ".";
+      document.getElementById("modalContent").innerHTML = `
+        <h2>🛍️ ${nome}</h2>
+        <p>Obrigado pelo seu interesse!</p>
+        <div class="info">
+          Para consultar <b>preço, disponibilidade e entrega</b>, fale com a
+          World Express pelo WhatsApp.
+        </div>
+        <button class="form-btn" onclick="whatsapp('${mensagem}')">
+          Pedir informações no WhatsApp
+        </button>
+      `;
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function enviarAfiliado() {
+      const nome = document.getElementById("afNome").value.trim();
+      const tel = document.getElementById("afTel").value.trim();
+      const info = document.getElementById("afInfo").value.trim();
+
+      if (!nome || !tel) {
+        alert("Preencha o nome e o telefone.");
+        return;
+      }
+
+      const msg =
+        "Olá! Quero ser afiliado da World Express.%0A%0A" +
+        "Nome: " + encodeURIComponent(nome) +
+        "%0ATelefone: " + encodeURIComponent(tel) +
+        "%0AComo vou vender: " + encodeURIComponent(info);
+
+      window.open("https://wa.me/" + WHATSAPP + "?text=" + msg, "_blank");
+    }
+
+    function enviarMarketing() {
+      const nome = document.getElementById("mkNome").value.trim();
+      const produto = document.getElementById("mkProduto").value.trim();
+      const msg = document.getElementById("mkMsg").value.trim();
+
+      if (!nome || !produto) {
+        alert("Preencha o nome e o produto/campanha.");
+        return;
+      }
+
+      const texto =
+        "Olá! Quero solicitar publicidade na World Express.%0A%0A" +
+        "Nome: " + encodeURIComponent(nome) +
+        "%0AProduto/campanha: " + encodeURIComponent(produto) +
+        "%0AMensagem: " + encodeURIComponent(msg);
+
+      window.open("https://wa.me/" + WHATSAPP + "?text=" + texto, "_blank");
+    }
+
+    function whatsapp(mensagem) {
+      window.open(
+        "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(mensagem),
+        "_blank"
+      );
+    }
+
+    function fechar() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) fechar();
+    };
+  </script>
+</body>
+</html>
