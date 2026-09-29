@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Express</title>
+  <meta name="description" content="World Express - um mundo de business">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #5a321f, #d96b8b);
+      color: #fff;
+      min-height: 100vh;
+    }
+    header { text-align: center; padding: 35px 15px 20px; }
+    header h1 { margin: 0 0 8px; font-size: 36px; }
+    header p { margin: 0; font-size: 18px; }
+    .container { max-width: 900px; margin: auto; padding: 15px; }
+    .card {
+      background: rgba(255,255,255,.13);
+      border-radius: 18px;
+      padding: 22px;
+      margin: 15px 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,.18);
+      backdrop-filter: blur(5px);
+    }
+    .card h2 { margin-top: 0; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .product {
+      background: rgba(255,255,255,.16);
+      padding: 18px 10px;
+      border-radius: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .product:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.25);
+    }
+    .buttons { display: grid; gap: 12px; margin-top: 18px; }
+    button, a.button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      color: #fff;
+      background: #25D366;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button.secondary, a.button.secondary { background: #222; }
+    button.pink { background: #d96b8b; }
+    .hidden { display: none; }
+    .panel {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.20);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .success {
+      background: rgba(37,211,102,.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+      opacity: .9;
+    }
+    .close { background: #444; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>World Express</h1>
+  <p>Um mundo de business</p>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <h2>🛍️ Nossos produtos</h2>
+    <div class="products">
+      <div class="product" onclick="mostrarProduto('Sabão')">🧼<br>Sabão</div>
+      <div class="product" onclick="mostrarProduto('Sabonete')">🧴<br>Sabonete</div>
+      <div class="product" onclick="mostrarProduto('Sabão líquido artesanal')">🫧<br>Sabão líquido artesanal</div>
+      <div class="product" onclick="mostrarProduto('Vasos artesanais')">🏺<br>Vasos artesanais</div>
+      <div class="product" onclick="mostrarProduto('Resina')">✨<br>Resina</div>
+      <div class="product" onclick="mostrarProduto('Capas de celular')">📱<br>Capas de celular</div>
+      <div class="product" onclick="mostrarProduto('Películas')">🛡️<br>Películas</div>
+      <div class="product" onclick="mostrarProduto('Acessórios eletrônicos')">🔌<br>Acessórios eletrônicos</div>
+    </div>
+
+    <div id="produtoPainel" class="panel hidden">
+      <h3 id="produtoTitulo"></h3>
+      <p id="produtoTexto"></p>
+      <button class="pink" onclick="fecharPainel('produtoPainel')">Fechar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🤝 Conta de afiliados</h2>
+    <p>Venda produtos da World Express e acompanhe as suas comissões.</p>
+    <button class="secondary" onclick="abrirPainel('afiliadoPainel')">Área de afiliados</button>
+
+    <div id="afiliadoPainel" class="panel hidden">
+      <h3>🤝 Cadastro de afiliado</h3>
+      <label>Nome</label>
+      <input id="afNome" type="text" placeholder="Digite o seu nome">
+      <label>Telefone</label>
+      <input id="afTelefone" type="tel" placeholder="Digite o seu telefone">
+      <label>Email</label>
+      <input id="afEmail" type="email" placeholder="Digite o seu email">
+      <button class="pink" onclick="cadastrarAfiliado()">Criar conta de afiliado</button>
+      <div id="afiliadoMensagem"></div>
+      <button class="close" onclick="fecharPainel('afiliadoPainel')">Fechar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📣 Marketing</h2>
+    <p>Divulgue produtos e campanhas da World Express.</p>
+    <button class="secondary" onclick="abrirPainel('marketingPainel')">Marketing e publicidade</button>
+
+    <div id="marketingPainel" class="panel hidden">
+      <h3>📣 Criar anúncio</h3>
+      <label>Produto</label>
+      <select id="produtoAnuncio">
+        <option>Sabão</option>
+        <option>Sabonete</option>
+        <option>Sabão líquido artesanal</option>
+        <option>Vasos artesanais</option>
+        <option>Resina</option>
+        <option>Capas de celular</option>
+        <option>Películas</option>
+        <option>Acessórios eletrônicos</option>
+      </select>
+      <label>Texto do anúncio</label>
+      <textarea id="textoAnuncio" placeholder="Escreva o seu anúncio aqui..."></textarea>
+      <button class="pink" onclick="criarAnuncio()">Publicar anúncio</button>
+      <div id="anuncioMensagem"></div>
+      <button class="close" onclick="fecharPainel('marketingPainel')">Fechar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>💬 Atendimento</h2>
+    <p>Fale conosco pelo WhatsApp.</p>
+    <div class="buttons">
+      <!-- TROQUE 244XXXXXXXXX PELO SEU NÚMERO DO WHATSAPP -->
+      <a class="button" href="https://wa.me/244XXXXXXXXX" target="_blank">
+        💬 Falar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>💳 Pagamentos</h2>
+    <p>Escolha uma opção para consultar informações de pagamento.</p>
+    <button class="secondary" onclick="abrirPainel('pagamentoPainel')">Ver opções de pagamento</button>
+
+    <div id="pagamentoPainel" class="panel hidden">
+      <h3>💳 Formas de pagamento</h3>
+      <p>💰 Pagamento em dinheiro</p>
+      <p>🏦 Transferência bancária</p>
+      <p>📱 Pagamento digital</p>
+      <p>💳 Outras opções serão adicionadas futuramente.</p>
+      <button class="close" onclick="fecharPainel('pagamentoPainel')">Fechar</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🔒 Termos e privacidade</h2>
+    <p>Consulte as condições de utilização e a política de privacidade da World Express.</p>
+    <button class="secondary" onclick="abrirPainel('termosPainel')">Ler termos e privacidade</button>
+
+    <div id="termosPainel" class="panel hidden">
+      <h3>🔒 Termos de utilização</h3>
+      <p>A World Express é uma plataforma destinada à divulgação e comercialização de produtos e serviços.</p>
+      <h3>🛡️ Privacidade</h3>
+      <p>As informações fornecidas pelo utilizador devem ser utilizadas apenas para atendimento, cadastro e funcionamento dos serviços.</p>
+      <p>Não forneça informações bancárias ou palavras-passe através de mensagens públicas.</p>
+      <button class="close" onclick="fecharPainel('termosPainel')">Fechar</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 World Express — Todos os direitos reservados.
+</footer>
+
+<script>
+function abrirPainel(id) {
+  const painel = document.getElementById(id);
+  if (painel) {
+    painel.classList.remove("hidden");
+    painel.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+function fecharPainel(id) {
+  const painel = document.getElementById(id);
+  if (painel) painel.classList.add("hidden");
+}
+
+function mostrarProduto(nome) {
+  document.getElementById("produtoTitulo").textContent = "🛍️ " + nome;
+  document.getElementById("produtoTexto").textContent =
+    "Você selecionou " + nome +
+    ". Em breve poderá consultar preço, descrição, disponibilidade e fazer o seu pedido diretamente pela World Express.";
+
+  const painel = document.getElementById("produtoPainel");
+  painel.classList.remove("hidden");
+  painel.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function cadastrarAfiliado() {
+  const nome = document.getElementById("afNome").value.trim();
+  const telefone = document.getElementById("afTelefone").value.trim();
+  const email = document.getElementById("afEmail").value.trim();
+  const mensagem = document.getElementById("afiliadoMensagem");
+
+  if (!nome || !telefone || !email) {
+    mensagem.innerHTML = '<div class="success">⚠️ Preencha todos os campos.</div>';
+    return;
+  }
+
+  mensagem.innerHTML =
+    '<div class="success">✅ Cadastro iniciado com sucesso! Os dados foram preenchidos e a área de afiliados está preparada para receber o sistema de contas.</div>';
+}
+
+function criarAnuncio() {
+  const produto = document.getElementById("produtoAnuncio").value;
+  const texto = document.getElementById("textoAnuncio").value.trim();
+  const mensagem = document.getElementById("anuncioMensagem");
+
+  if (!texto) {
+    mensagem.innerHTML = '<div class="success">⚠️ Escreva o texto do anúncio.</div>';
+    return;
+  }
+
+  mensagem.innerHTML =
+    '<div class="success">📣 Anúncio preparado para: <strong>' +
+    produto + '</strong><br><br>' + texto + '</div>';
+}
+</script>
+
+</body>
+</html>
