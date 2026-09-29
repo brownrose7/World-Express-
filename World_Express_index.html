@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#5a321f"><meta name="description" content="World Express - um mundo de business">
+<title>World Express</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#5a321f,#d96b8b);color:#fff;min-height:100vh}header{text-align:center;padding:28px 16px 18px}header h1{margin:0;font-size:36px}header p{margin:8px 0}.container{max-width:900px;margin:auto;padding:16px}.screen{display:none}.screen.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}.card{background:#fff;color:#432718;border-radius:18px;padding:18px;min-height:125px;box-shadow:0 6px 18px #0003}.card button{width:100%;height:100%;border:0;background:none;color:#432718;font-size:16px;font-weight:bold;cursor:pointer}.icon{display:block;font-size:32px;margin-bottom:10px}.panel{background:#fff;color:#3e261b;border-radius:20px;padding:22px;box-shadow:0 6px 18px #0003}.panel h2{margin-top:0}.back,.primary{border:0;border-radius:12px;padding:12px 18px;font-weight:bold;cursor:pointer}.back{background:#5a321f;color:#fff;margin-bottom:18px}.primary{background:#d96b8b;color:#fff}input,textarea,select{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #ccc;border-radius:10px;font-size:15px}textarea{min-height:110px}.product{padding:14px;border:1px solid #eadbd3;border-radius:14px;margin:10px 0}.notice{padding:12px;border-radius:12px;background:#f8e9ee;margin:12px 0}footer{text-align:center;padding:28px 10px;font-size:13px}
+</style>
+</head>
+<body>
+<header><h1>World Express</h1><p>Um mundo de business</p></header>
+<main class="container">
+<section id="home" class="screen active"><div class="grid">
+<div class="card"><button onclick="show('produtos')"><span class="icon">🛍️</span>Produtos</button></div>
+<div class="card"><button onclick="show('afiliados')"><span class="icon">👥</span>Conta de Afiliados</button></div>
+<div class="card"><button onclick="show('pagamentos')"><span class="icon">💳</span>Pagamentos</button></div>
+<div class="card"><button onclick="show('chat')"><span class="icon">💬</span>Chat</button></div>
+<div class="card"><button onclick="show('marketing')"><span class="icon">📢</span>Marketing</button></div>
+<div class="card"><button onclick="show('suporte')"><span class="icon">🆘</span>Suporte</button></div>
+<div class="card"><button onclick="show('termos')"><span class="icon">📜</span>Termos e Privacidade</button></div>
+</div></section>
+<section id="produtos" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>🛍️ Produtos</h2>
+<div class="product"><b>Sabão artesanal</b><p>Produto artesanal caseiro.</p></div><div class="product"><b>Sabonete</b><p>Produtos de higiene e cuidado pessoal.</p></div><div class="product"><b>Sabão líquido artesanal</b><p>Produção artesanal para uso doméstico.</p></div><div class="product"><b>Vasos artesanais</b><p>Peças artesanais para decoração.</p></div><div class="product"><b>Resina</b><p>Produtos e trabalhos em resina.</p></div><div class="product"><b>Capas de celular</b><p>Capas para diferentes modelos.</p></div><div class="product"><b>Películas</b><p>Proteção para o ecrã.</p></div><div class="product"><b>Acessórios eletrônicos</b><p>Diversos acessórios.</p></div></div></section>
+<section id="afiliados" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>👥 Conta de Afiliados</h2><p>Cadastre-se para vender produtos do World Express.</p><input id="afNome" placeholder="Seu nome"><input id="afTel" placeholder="Seu telefone"><input id="afEmail" type="email" placeholder="Seu e-mail"><button class="primary" onclick="afiliado()">Criar conta de afiliado</button><div id="afMsg"></div></div></section>
+<section id="pagamentos" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>💳 Pagamentos</h2><select id="metodo"><option value="">Selecionar método</option><option>Transferência bancária / IBAN</option><option>Express</option><option>Cartão</option></select><input id="valor" type="number" placeholder="Valor (Kz)"><button class="primary" onclick="pagamento()">Continuar</button><div id="pagMsg"></div></div></section>
+<section id="chat" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>💬 Chat</h2><div id="chatBox" class="notice">Olá! Escreva a sua mensagem abaixo.</div><textarea id="chatInput" placeholder="Digite a sua mensagem..."></textarea><button class="primary" onclick="chat()">Enviar mensagem</button></div></section>
+<section id="marketing" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>📢 Marketing e Publicidade</h2><input id="titulo" placeholder="Título do anúncio"><textarea id="texto" placeholder="Escreva o anúncio..."></textarea><button class="primary" onclick="anuncio()">Publicar anúncio</button><div id="anMsg"></div></div></section>
+<section id="suporte" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>🆘 Suporte</h2><input id="supNome" placeholder="Seu nome"><textarea id="supTexto" placeholder="Descreva o problema..."></textarea><button class="primary" onclick="suporte()">Enviar pedido</button><div id="supMsg"></div></div></section>
+<section id="termos" class="screen"><div class="panel"><button class="back" onclick="home()">← Voltar</button><h2>📜 Termos e Privacidade</h2><h3>Termos de utilização</h3><p>O World Express é uma plataforma destinada à divulgação e comercialização de produtos e serviços. As informações podem ser atualizadas conforme o desenvolvimento da plataforma.</p><h3>Privacidade</h3><p>Esta versão demonstra as funcionalidades no dispositivo. Os formulários não enviam automaticamente dados para um servidor.</p><div class="notice"><b>Nota:</b> pagamentos reais, chat online e contas com servidor exigirão uma ligação posterior a um backend seguro.</div></div></section>
+</main><footer>© 2026 World Express — Um mundo de business</footer>
+<script>
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}function home(){show('home')}
+function afiliado(){let n=afNome.value.trim(),t=afTel.value.trim(),e=afEmail.value.trim();if(!n||!t||!e){afMsg.innerHTML='<div class="notice">Preencha todos os campos.</div>';return}localStorage.setItem('worldExpressAfiliado',JSON.stringify({n,t,e}));afMsg.innerHTML='<div class="notice">✅ Conta criada neste dispositivo.</div>'}
+function pagamento(){if(!metodo.value||!valor.value||Number(valor.value)<=0){pagMsg.innerHTML='<div class="notice">Escolha o método e informe um valor válido.</div>';return}pagMsg.innerHTML='<div class="notice">✅ Pedido preparado. Esta versão não cobra valores automaticamente.</div>'}
+function chat(){let m=chatInput.value.trim();if(!m)return;chatBox.innerHTML='Você: '+esc(m)+'<br><br><b>World Express:</b> Mensagem registada nesta demonstração.';chatInput.value=''}
+function anuncio(){if(!titulo.value.trim()||!texto.value.trim()){anMsg.innerHTML='<div class="notice">Preencha o título e o texto.</div>';return}localStorage.setItem('worldExpressAnuncio',JSON.stringify({titulo:titulo.value,texto:texto.value}));anMsg.innerHTML='<div class="notice">📢 Anúncio guardado neste dispositivo.</div>'}
+function suporte(){if(!supNome.value.trim()||!supTexto.value.trim()){supMsg.innerHTML='<div class="notice">Preencha o nome e a mensagem.</div>';return}supMsg.innerHTML='<div class="notice">✅ Pedido de suporte registado nesta demonstração.</div>';supTexto.value=''}
+function esc(s){let d=document.createElement('div');d.textContent=s;return d.innerHTML}
+</script>
+</body></html>
