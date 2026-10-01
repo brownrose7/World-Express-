@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5a321f">
+  <meta name="description" content="World Express - um mundo de business">
+  <title>World Express</title>
+  <style>
+    :root{
+      --brown:#5a321f;
+      --brown2:#7b472c;
+      --pink:#d96b8b;
+      --pink2:#f09ab0;
+      --bg:#fff8f5;
+      --card:#ffffff;
+      --text:#2b211d;
+      --muted:#756963;
+      --line:#eadbd4;
+      --ok:#168a55;
+      --danger:#b3261e;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:linear-gradient(135deg,#5a321f,#d96b8b);
+      min-height:100vh;
+    }
+    header{
+      color:white;
+      padding:28px 18px 22px;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:linear-gradient(135deg,rgba(90,50,31,.98),rgba(217,107,139,.98));
+      box-shadow:0 3px 18px rgba(0,0,0,.18);
+    }
+    header h1{margin:0;font-size:34px}
+    header p{margin:7px 0 0;opacity:.95}
+    .wrap{max-width:1050px;margin:auto;padding:18px}
+    .notice{
+      background:#fff3cd;
+      color:#624d03;
+      padding:13px 15px;
+      border-radius:14px;
+      margin-bottom:16px;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:14px;
+    }
+    .card{
+      background:rgba(255,255,255,.97);
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:0 8px 25px rgba(0,0,0,.14);
+    }
+    .card h2{margin:0 0 8px;font-size:20px}
+    .card p{color:var(--muted);line-height:1.45}
+    button,.btn{
+      width:100%;
+      border:0;
+      border-radius:13px;
+      padding:13px 15px;
+      margin-top:9px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      background:var(--brown);
+      color:white;
+      text-decoration:none;
+      display:inline-block;
+      text-align:center;
+    }
+    button:hover,.btn:hover{filter:brightness(1.08)}
+    .pink{background:var(--pink)}
+    .light{background:#f6ece8;color:var(--brown)}
+    .green{background:var(--ok)}
+    .section{
+      margin-top:18px;
+      scroll-margin-top:125px;
+    }
+    .section h2{color:white;margin:0 0 10px;font-size:25px}
+    .product{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:190px;
+    }
+    .emoji{font-size:40px}
+    .price{font-size:20px;font-weight:800;color:var(--pink)}
+    .hidden{display:none!important}
+    form{display:grid;gap:10px}
+    input,textarea,select{
+      width:100%;
+      padding:13px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      font-size:15px;
+      background:white;
+    }
+    textarea{min-height:100px;resize:vertical}
+    .result{
+      margin-top:12px;
+      padding:13px;
+      border-radius:12px;
+      background:#edf8f2;
+      color:#145b3c;
+      line-height:1.45;
+    }
+    .chat{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      background:#25d366;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:27px;
+      box-shadow:0 5px 18px rgba(0,0,0,.28);
+      z-index:30;
+      text-decoration:none;
+    }
+    footer{
+      text-align:center;
+      color:white;
+      padding:30px 15px 90px;
+      line-height:1.6;
+    }
+    .small{font-size:13px;color:var(--muted)}
+    @media(max-width:520px){
+      header h1{font-size:29px}
+      .wrap{padding:12px}
+      .card{padding:15px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 World Express</h1>
+  <p>Um mundo de business</p>
+</header>
+
+<main class="wrap">
+
+  <div class="notice">
+    <strong>World Express está online.</strong><br>
+    Este arquivo foi preparado para funcionar sozinho no GitHub Pages, sem depender de outros arquivos.
+    Os botões abrem as funções dentro da própria página.
+  </div>
+
+  <section class="grid">
+    <div class="card">
+      <h2>🛍️ Produtos</h2>
+      <p>Veja as categorias disponíveis no World Express.</p>
+      <button onclick="show('produtos')">Ver produtos</button>
+    </div>
+
+    <div class="card">
+      <h2>🤝 Conta de afiliados</h2>
+      <p>Cadastre-se para divulgar produtos e acompanhar pedidos.</p>
+      <button class="pink" onclick="show('afiliados')">Abrir conta</button>
+    </div>
+
+    <div class="card">
+      <h2>📢 Marketing</h2>
+      <p>Crie um anúncio para divulgar seus produtos.</p>
+      <button onclick="show('marketing')">Criar anúncio</button>
+    </div>
+
+    <div class="card">
+      <h2>💳 Pagamentos</h2>
+      <p>Escolha um método e veja as instruções disponíveis.</p>
+      <button onclick="show('pagamentos')">Ver pagamentos</button>
+    </div>
+
+    <div class="card">
+      <h2>💬 Chat e suporte</h2>
+      <p>Envie uma mensagem para o suporte do World Express.</p>
+      <button class="green" onclick="show('suporte')">Abrir suporte</button>
+    </div>
+
+    <div class="card">
+      <h2>📜 Termos e privacidade</h2>
+      <p>Consulte as regras e informações da plataforma.</p>
+      <button class="light" onclick="show('termos')">Abrir documentos</button>
+    </div>
+  </section>
+
+  <section id="produtos" class="section hidden">
+    <h2>🛍️ Produtos World Express</h2>
+    <div class="grid">
+      <div class="card product"><div><div class="emoji">🧼</div><h2>Sabão artesanal</h2><p>Sabão em líquido artesanal e produtos de limpeza.</p></div><button onclick="produto('Sabão artesanal')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">🧴</div><h2>Sabonete</h2><p>Produtos artesanais de higiene e cuidados pessoais.</p></div><button onclick="produto('Sabonete')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">🏺</div><h2>Vasos artesanais</h2><p>Peças artesanais e decoração.</p></div><button onclick="produto('Vasos artesanais')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">🧪</div><h2>Resina epóxi</h2><p>Produtos e peças feitas com resina.</p></div><button onclick="produto('Resina epóxi')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">📱</div><h2>Capas de celular</h2><p>Capas para vários modelos de telefone.</p></div><button onclick="produto('Capas de celular')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">🛡️</div><h2>Películas</h2><p>Películas e proteção para celulares.</p></div><button onclick="produto('Películas')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">🔌</div><h2>Acessórios eletrônicos</h2><p>Cabos, carregadores e outros acessórios.</p></div><button onclick="produto('Acessórios eletrônicos')">Tenho interesse</button></div>
+      <div class="card product"><div><div class="emoji">📦</div><h2>Produtos diversos</h2><p>Outros produtos disponíveis no marketplace.</p></div><button onclick="produto('Produtos diversos')">Tenho interesse</button></div>
+    </div>
+  </section>
+
+  <section id="afiliados" class="section hidden">
+    <h2>🤝 Conta de afiliados</h2>
+    <div class="card">
+      <p>Preencha o formulário. Os dados ficam guardados neste aparelho para teste. Para uma conta realmente online, será necessário ligar o formulário a um banco de dados/backend.</p>
+      <form onsubmit="cadastrarAfiliado(event)">
+        <input id="nomeAf" required placeholder="Nome completo">
+        <input id="telefoneAf" required placeholder="Telefone">
+        <input id="emailAf" type="email" required placeholder="E-mail">
+        <button class="pink">Criar cadastro</button>
+      </form>
+      <div id="afResult"></div>
+    </div>
+  </section>
+
+  <section id="marketing" class="section hidden">
+    <h2>📢 Marketing / Publicidade</h2>
+    <div class="card">
+      <form onsubmit="criarAnuncio(event)">
+        <input id="tituloAnuncio" required placeholder="Título do anúncio">
+        <textarea id="textoAnuncio" required placeholder="Escreva o anúncio..."></textarea>
+        <select id="categoriaAnuncio">
+          <option>Produtos</option>
+          <option>Promoção</option>
+          <option>Afiliados</option>
+          <option>Serviços</option>
+        </select>
+        <button>Publicar anúncio no mural</button>
+      </form>
+      <div id="anuncioResult"></div>
+    </div>
+  </section>
+
+  <section id="pagamentos" class="section hidden">
+    <h2>💳 Métodos de pagamento</h2>
+    <div class="grid">
+      <div class="card"><h2>💳 Cartão</h2><p>Área preparada para integração futura com um gateway de pagamento.</p><button onclick="pagamento('Cartão')">Selecionar</button></div>
+      <div class="card"><h2>🏦 IBAN</h2><p>Área para transferência bancária. Os dados bancários devem ser adicionados pelo administrador.</p><button onclick="pagamento('IBAN')">Selecionar</button></div>
+      <div class="card"><h2>📲 Express</h2><p>Área preparada para método de pagamento móvel, conforme o serviço escolhido.</p><button onclick="pagamento('Express')">Selecionar</button></div>
+    </div>
+    <div id="payResult"></div>
+  </section>
+
+  <section id="suporte" class="section hidden">
+    <h2>💬 Chat / Suporte</h2>
+    <div class="card">
+      <form onsubmit="enviarSuporte(event)">
+        <input id="nomeSup" required placeholder="Seu nome">
+        <input id="assuntoSup" required placeholder="Assunto">
+        <textarea id="mensagemSup" required placeholder="Digite sua mensagem"></textarea>
+        <button class="green">Enviar mensagem</button>
+      </form>
+      <div id="supResult"></div>
+    </div>
+  </section>
+
+  <section id="termos" class="section hidden">
+    <h2>📜 Termos e privacidade</h2>
+    <div class="card">
+      <h2>Termos de uso</h2>
+      <p>O World Express é uma plataforma de apresentação e comercialização de produtos. As informações de preços, disponibilidade, entrega e pagamento devem ser confirmadas antes de qualquer compra.</p>
+      <h2>Privacidade</h2>
+      <p>Os formulários desta versão demonstrativa usam o armazenamento local do navegador. Não envie informações bancárias ou documentos pessoais para esta versão de teste.</p>
+      <button class="light" onclick="fecharSecoes()">Voltar ao início</button>
+    </div>
+  </section>
+
+</main>
+
+<a class="chat" href="https://wa.me/?text=Olá%20World%20Express%2C%20preciso%20de%20ajuda." target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<footer>
+  <strong>World Express</strong><br>
+  Um mundo de business<br>
+  <span>© 2026 World Express</span>
+</footer>
+
+<script>
+  function fecharSecoes(){
+    document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function show(id){
+    document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+    const el=document.getElementById(id);
+    if(el){
+      el.classList.remove('hidden');
+      setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),50);
+    }
+  }
+
+  function produto(nome){
+    alert('Você selecionou: ' + nome + '\\n\\nPara finalizar a compra, entre em contacto com o World Express.');
+  }
+
+  function pagamento(metodo){
+    document.getElementById('payResult').innerHTML =
+      '<div class="result"><strong>Método selecionado:</strong> '+metodo+
+      '<br>Esta versão deixa a área pronta para integração. Para receber pagamentos reais, será necessário configurar um serviço de pagamento e um backend seguro.</div>';
+  }
+
+  function cadastrarAfiliado(e){
+    e.preventDefault();
+    const nome=document.getElementById('nomeAf').value.trim();
+    const tel=document.getElementById('telefoneAf').value.trim();
+    const email=document.getElementById('emailAf').value.trim();
+    const afiliado={nome,tel,email,data:new Date().toISOString()};
+    localStorage.setItem('worldExpressAfiliado',JSON.stringify(afiliado));
+    document.getElementById('afResult').innerHTML =
+      '<div class="result">✅ Cadastro criado neste aparelho para teste.<br><strong>Nome:</strong> '+escapeHtml(nome)+
+      '<br><strong>Telefone:</strong> '+escapeHtml(tel)+
+      '<br><strong>E-mail:</strong> '+escapeHtml(email)+
+      '<br><br>Para funcionar com vários utilizadores, precisaremos de uma base de dados online.</div>';
+    e.target.reset();
+  }
+
+  function criarAnuncio(e){
+    e.preventDefault();
+    const titulo=document.getElementById('tituloAnuncio').value.trim();
+    const texto=document.getElementById('textoAnuncio').value.trim();
+    const categoria=document.getElementById('categoriaAnuncio').value;
+    const anuncio={titulo,texto,categoria,data:new Date().toLocaleString('pt-PT')};
+    localStorage.setItem('worldExpressAnuncio',JSON.stringify(anuncio));
+    document.getElementById('anuncioResult').innerHTML =
+      '<div class="result">📢 Anúncio criado no aparelho.<br><strong>'+escapeHtml(titulo)+'</strong><br>'+
+      escapeHtml(texto)+'<br><small>Categoria: '+escapeHtml(categoria)+'</small></div>';
+    e.target.reset();
+  }
+
+  function enviarSuporte(e){
+    e.preventDefault();
+    const nome=document.getElementById('nomeSup').value.trim();
+    const assunto=document.getElementById('assuntoSup').value.trim();
+    const msg=document.getElementById('mensagemSup').value.trim();
+    localStorage.setItem('worldExpressSuporte',JSON.stringify({nome,assunto,msg,data:new Date().toISOString()}));
+    document.getElementById('supResult').innerHTML =
+      '<div class="result">✅ Mensagem registrada neste aparelho para teste.<br>'+
+      'Assunto: <strong>'+escapeHtml(assunto)+'</strong><br>'+
+      'Para receber mensagens de clientes de verdade, ligaremos esta área a um backend/chat online.</div>';
+    e.target.reset();
+  }
+
+  function escapeHtml(text){
+    return text.replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m];
+    });
+  }
+</script>
+</body>
+</html>
