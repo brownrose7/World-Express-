@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6b3b24">
+  <meta name="description" content="World Express - um mundo de business">
+  <title>World Express</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #5a321f, #d96b8b);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 28px 18px 20px;
+      text-align: center;
+      background: rgba(0,0,0,.18);
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+    }
+
+    header p {
+      margin: 0;
+      opacity: .92;
+    }
+
+    .container {
+      width: min(920px, 94%);
+      margin: 0 auto;
+      padding: 22px 0 45px;
+    }
+
+    .hero, .card {
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+      backdrop-filter: blur(7px);
+    }
+
+    .hero h2, .card h2 {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 12px;
+    }
+
+    button, .action {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 15px 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #4b281a;
+      background: #fff;
+      transition: transform .15s, opacity .15s;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    button:active, .action:active {
+      transform: scale(.97);
+      opacity: .85;
+    }
+
+    .primary {
+      background: #ffd5df;
+    }
+
+    .green {
+      background: #d8f7df;
+    }
+
+    .gold {
+      background: #fff0b8;
+    }
+
+    .dark {
+      background: #432719;
+      color: #fff;
+    }
+
+    .small {
+      font-size: 13px;
+      font-weight: normal;
+      opacity: .9;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.20);
+      display: none;
+    }
+
+    .section {
+      scroll-margin-top: 15px;
+    }
+
+    .product-box {
+      display: none;
+      margin-top: 16px;
+      padding: 18px;
+      background: rgba(0,0,0,.18);
+      border-radius: 14px;
+    }
+
+    .product-box.show {
+      display: block;
+    }
+
+    .product-box h3 {
+      margin-top: 0;
+    }
+
+    .back {
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: rgba(0,0,0,.2);
+      font-size: 13px;
+    }
+
+    .notice {
+      padding: 13px;
+      border-left: 4px solid #fff;
+      background: rgba(255,255,255,.10);
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 30px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      button, .action { padding: 13px 8px; font-size: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌍 World Express</h1>
+  <p>Um mundo de business</p>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h2>Bem-vindo ao World Express</h2>
+    <p>
+      Encontre produtos, contacte-nos, conheça o programa de afiliados
+      e tenha acesso às principais funções do nosso projeto.
+    </p>
+
+    <div class="grid">
+      <button class="primary" onclick="mostrar('produtos')">🛍️ Produtos</button>
+      <button onclick="mostrar('afiliados')">👥 Afiliados</button>
+      <button onclick="mostrar('pagamentos')">💳 Pagamentos</button>
+      <button onclick="mostrar('marketing')">📢 Marketing</button>
+      <button class="green" onclick="abrirWhatsApp()">💬 WhatsApp</button>
+      <button onclick="mostrar('suporte')">🆘 Suporte</button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </section>
+
+  <section id="produtos" class="card section">
+    <h2>🛍️ Produtos</h2>
+    <p>Escolha uma categoria para ver os detalhes.</p>
+
+    <div class="grid">
+      <button onclick="produto('Sabão')">🧼 Sabão</button>
+      <button onclick="produto('Sabonete')">🧴 Sabonete</button>
+      <button onclick="produto('Vasos artesanais')">🏺 Vasos artesanais</button>
+      <button onclick="produto('Resina')">🧪 Resina</button>
+      <button onclick="produto('Capas de celular')">📱 Capas</button>
+      <button onclick="produto('Películas')">🛡️ Películas</button>
+      <button onclick="produto('Acessórios eletrônicos')">🔌 Acessórios</button>
+      <button onclick="produto('Produtos diversos')">📦 Diversos</button>
+    </div>
+
+    <div id="produtoDetalhe" class="product-box"></div>
+  </section>
+
+  <section id="afiliados" class="card section">
+    <h2>👥 Conta de Afiliados</h2>
+    <p>
+      Área inicial para pessoas interessadas em divulgar os produtos
+      do World Express e receber comissão.
+    </p>
+
+    <div class="notice">
+      <strong>Como funciona?</strong><br>
+      1. Registe o seu interesse.<br>
+      2. Divulgue os produtos.<br>
+      3. Registe as vendas realizadas.<br>
+      4. Receba a comissão conforme as regras do programa.
+    </div>
+
+    <div class="grid">
+      <button onclick="afiliado('registo')">📝 Quero ser afiliado</button>
+      <button onclick="afiliado('informacao')">ℹ️ Informações</button>
+    </div>
+
+    <div id="afiliadoResultado" class="status"></div>
+  </section>
+
+  <section id="pagamentos" class="card section">
+    <h2>💳 Métodos de Pagamento</h2>
+    <p>Área preparada para apresentar os métodos de pagamento do World Express.</p>
+
+    <div class="grid">
+      <button onclick="pagamento('Transferência bancária')">🏦 Transferência</button>
+      <button onclick="pagamento('IBAN')">💳 IBAN</button>
+      <button onclick="pagamento('Pagamento Express')">⚡ Express</button>
+      <button onclick="pagamento('Pagamento na entrega')">📦 Na entrega</button>
+    </div>
+
+    <div id="pagamentoResultado" class="status"></div>
+  </section>
+
+  <section id="marketing" class="card section">
+    <h2>📢 Marketing e Publicidade</h2>
+    <p>
+      Espaço para campanhas, anúncios, promoções e divulgação dos produtos.
+    </p>
+
+    <div class="grid">
+      <button class="gold" onclick="marketing('Criar anúncio')">📣 Criar anúncio</button>
+      <button onclick="marketing('Promoção')">🔥 Promoção</button>
+      <button onclick="marketing('Campanha')">🚀 Campanha</button>
+      <button onclick="marketing('Divulgação')">📲 Divulgação</button>
+    </div>
+
+    <div id="marketingResultado" class="status"></div>
+  </section>
+
+  <section id="suporte" class="card section">
+    <h2>🆘 Suporte</h2>
+    <p>
+      Precisa de ajuda? Escolha uma opção abaixo.
+    </p>
+
+    <div class="grid">
+      <button onclick="abrirWhatsApp()">💬 Falar no WhatsApp</button>
+      <button onclick="mostrarMensagem('O suporte online está preparado. Personalize este texto com os seus contactos.')">📞 Contactar suporte</button>
+      <button onclick="mostrarMensagem('Perguntas frequentes: pagamentos, produtos, afiliados, entregas e publicidade.')">❓ Perguntas frequentes</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📜 Informações legais</h2>
+    <div class="grid">
+      <button onclick="mostrarMensagem('Termos de utilização: personalize esta área com os termos oficiais do World Express antes de publicar.')">📜 Termos</button>
+      <button onclick="mostrarMensagem('Política de privacidade: personalize esta área com a política oficial do World Express antes de publicar.')">🔐 Privacidade</button>
+      <button onclick="mostrarMensagem('Sobre o World Express: um projeto de business para apresentar produtos, vendas e serviços.')">ℹ️ Sobre</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🚀 Próximos passos</h2>
+    <p>
+      Esta versão já tem navegação e ações funcionando no navegador.
+      Para transformar determinadas áreas em sistemas reais, ainda será
+      necessário ligar o projeto a serviços de backend, banco de dados,
+      pagamentos e autenticação.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="ano"></span> World Express — Um mundo de business
+</footer>
+
+<script>
+  /*
+    CONFIGURAÇÃO
+    ---------------------------------------------------------
+    Troque o número abaixo pelo seu número do WhatsApp,
+    usando o formato internacional sem +, espaços ou traços.
+    Exemplo para Angola: 2449XXXXXXXX
+  */
+  const WHATSAPP = "244900000000";
+
+  function mostrar(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    document.querySelectorAll(".section").forEach(sec => {
+      sec.style.display = "none";
+    });
+
+    el.style.display = "block";
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function produto(nome) {
+    const detalhe = document.getElementById("produtoDetalhe");
+
+    detalhe.innerHTML = `
+      <h3>${nome}</h3>
+      <p>Categoria selecionada: <strong>${nome}</strong>.</p>
+      <p class="small">
+        Aqui poderá colocar fotografia, descrição, preço, stock,
+        entrega e botão de compra quando o catálogo estiver ligado
+        ao sistema de produtos.
+      </p>
+      <button class="primary" onclick="comprar('${nome}')">🛒 Tenho interesse</button>
+    `;
+
+    detalhe.classList.add("show");
+  }
+
+  function comprar(nome) {
+    const mensagem = encodeURIComponent(
+      "Olá, World Express! Tenho interesse no produto: " + nome
+    );
+    abrirWhatsAppMensagem(mensagem);
+  }
+
+  function abrirWhatsApp() {
+    const mensagem = encodeURIComponent(
+      "Olá, World Express! Gostaria de obter informações."
+    );
+    abrirWhatsAppMensagem(mensagem);
+  }
+
+  function abrirWhatsAppMensagem(mensagem) {
+    if (WHATSAPP === "244900000000") {
+      mostrarMensagem(
+        "⚠️ Primeiro altere o número WHATSAPP no código pelo seu número real do WhatsApp."
+      );
+      return;
+    }
+
+    window.location.href = "https://wa.me/" + WHATSAPP + "?text=" + mensagem;
+  }
+
+  function afiliado(tipo) {
+    const resultado = document.getElementById("afiliadoResultado");
+    resultado.style.display = "block";
+
+    if (tipo === "registo") {
+      resultado.innerHTML =
+        "📝 Interesse registado nesta página. Para o registo real de afiliados, será necessário ligar esta função a um formulário e banco de dados.";
+    } else {
+      resultado.innerHTML =
+        "ℹ️ O programa de afiliados pode incluir link/código de indicação, controlo de vendas e cálculo de comissões.";
+    }
+  }
+
+  function pagamento(tipo) {
+    const resultado = document.getElementById("pagamentoResultado");
+    resultado.style.display = "block";
+    resultado.innerHTML =
+      "💳 Método selecionado: <strong>" + tipo + "</strong>.<br>" +
+      "<span class='small'>Os dados reais de pagamento devem ser configurados antes de receber pagamentos de clientes.</span>";
+  }
+
+  function marketing(tipo) {
+    const resultado = document.getElementById("marketingResultado");
+    resultado.style.display = "block";
+    resultado.innerHTML =
+      "📢 Opção selecionada: <strong>" + tipo + "</strong>.<br>" +
+      "<span class='small'>Esta área está pronta para receber um sistema de anúncios/campanhas.</span>";
+  }
+
+  function mostrarMensagem(texto) {
+    const status = document.getElementById("status");
+    status.innerHTML = texto;
+    status.style.display = "block";
+    status.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  document.getElementById("ano").textContent = new Date().getFullYear();
+
+  // Ao abrir a página, deixa as áreas internas fechadas.
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
